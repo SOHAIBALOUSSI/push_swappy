@@ -14,24 +14,21 @@ void	exit_error(char *error_msg, char *str, char *args, int *array)
 	exit(EXIT_FAILURE);
 }
 
-int	deja_vu(int *nums, int *size)
+int	deja_vu(int *nums, int curr_size, int size)
 {
-	int i;
-
-	i = -1;
-	while (++i < *size - 1)
+	while (--size > curr_size)
 	{
-		if (nums[*size - 1] == nums[i])
+		if (nums[curr_size] == nums[size])
 		{
 			write(2, RED, 8);
 			write(2, "Error\n", 7);
-			ft_printf("%d is Dublicated\n", nums[*size - 1]);
+			ft_printf("%d is Dublicated\n", nums[curr_size]);
 			return (-1);
 		}
 	}
 	return (0);
 }
-
+// {0, 1, 2, 3, 4, 5}
 void	check_input(char *s)
 {
 	int	i;
@@ -95,12 +92,14 @@ void get_nums(char *arg, t_push_swap *stack)
 	int		i;
 	int		j;
 
-	stack->a.stack = malloc(count_nums(arg, ' ') * sizeof(int));
-	stack->b.stack = malloc(count_nums(arg, ' ') * sizeof(int));
+	stack->a.stack = malloc(stack->a.size * sizeof(int));
+	stack->b.stack = malloc(stack->a.size * sizeof(int));
 	if (!stack->a.stack || !stack->b.stack)
 		exit_error("Malloc failed!\n", NULL, NULL, NULL);
 	i = -1;
-	while (arg[++i])
+	stack->a.top = stack->a.size - 1;
+	int real_size = stack->a.size;
+	while (arg[++i] && stack->a.size >= 0)
 	{
 		tmp = NULL;
 		while (arg[i] && arg[i] == ' ')
@@ -111,8 +110,8 @@ void get_nums(char *arg, t_push_swap *stack)
 		while (arg[i] && arg[i] != ' ')
 			i++;
 		tmp = ft_substr(arg, j, i - j);
-		stack->a.stack[stack->a.size++] = fatoi(tmp, stack->a.stack, arg);
-		if (deja_vu(stack->a.stack, &stack->a.size) == -1)
+		stack->a.stack[--stack->a.size] = fatoi(tmp, stack->a.stack, arg);
+		if (deja_vu(stack->a.stack, stack->a.size, real_size) == -1)
 			exit_error(NULL, NULL, arg, stack->a.stack);
 	}
 }

@@ -23,6 +23,7 @@ typedef struct	s_push_swap
 
 
 int		fatoi(char *str, int *nums, char *arg);
+int		count_nums(char *s, char c);
 void	get_nums(char *arg, t_push_swap *stack);
 void	exit_error(char *error_msg, char *str, char *args, int *array);
 void	check_input(char *s);
