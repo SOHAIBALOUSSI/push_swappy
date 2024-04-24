@@ -1,6 +1,21 @@
 
 #include "push_swap.h"
 
+int	is_sorted(t_stack *a)
+{
+	int i;
+
+	i = a->top;
+	while (a->top > 0)
+	{
+		ft_printf("stk a :%d\n", a->stack[a->top]);
+		if (a->stack[a->top] > a->stack[a->top - 1])
+			return (-1);
+		a->top--;
+	}
+	return (0);
+}
+
 char *join_args(int ac, char **av)
 {
 	int		i;
@@ -40,13 +55,10 @@ void process_input(t_push_swap *stacks, int ac, char **av)
 	stacks->a.top = stacks->a.size - 1;
 	stacks->b.stack = malloc(stacks->a.size * sizeof(int));
 
-	while (stacks->a.top >= 0)
-		ft_printf("stk a : %d\n", stacks->a.stack[stacks->a.top--]);
+	// while (stacks->a.top >= 0)
+	// 	ft_printf("stk a : %d\n", stacks->a.stack[stacks->a.top--]);
 	
-	free(stacks->a.stack);
-	free(stacks->b.stack);
 
-	free(args);
 }
 
 
@@ -54,7 +66,7 @@ int	main(int ac, char **av)
 {
 	t_push_swap	stacks;
 
-	int i = 0;
+
 	stacks.a = (t_stack){0};
 	stacks.b = (t_stack){0};
 	stacks.b.top = -1;
@@ -64,12 +76,17 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		process_input(&stacks, ac, av);
-		if (is_sorted() == 0)
-			return(-1);
-		if (stacks.a.size <= 5)
-			performe_easy_sort();
+		if (!is_sorted(&stacks.a))
+		{
+			ft_printf("Done\n");
+			return (EXIT_SUCCESS);
+		}
 		else
-			performe_sorting_hack();
+			ft_printf("not sorted\n");
+		// if (stacks.a.size <= 5)
+		// 	performe_easy_sort();
+		// else
+		// 	performe_sorting_hack();
 	}
 	return (0);
 }
