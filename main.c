@@ -35,20 +35,17 @@ void process_input(t_push_swap *stacks, int ac, char **av)
 	if (!args)
 		exit_error("Error\nFailed to join Arguments!", NULL, NULL, NULL);
 	check_input(args);
-	int tmp;
-	tmp = count_nums(args, ' ');
-	stacks->a.size = tmp;
+	stacks->a.size = count_nums(args, ' ');
 	get_nums(args, stacks);
-	
-	stacks->a.size = tmp;
+	stacks->a.top = stacks->a.size - 1;
+	stacks->b.stack = malloc(stacks->a.size * sizeof(int));
 
-	// rotate(&stacks->a, 'a');
-	// while (stacks->a.top >= 0)
-	// 	ft_printf("stk a : %d\n", stacks->a.stack[stacks->a.top--]);
-	// while (stacks->b.top >= 0)
-	// 	ft_printf("stk b : %d\n", stacks->b.stack[stacks->b.top--]);
+	while (stacks->a.top >= 0)
+		ft_printf("stk a : %d\n", stacks->a.stack[stacks->a.top--]);
 	
 	free(stacks->a.stack);
+	free(stacks->b.stack);
+
 	free(args);
 }
 
@@ -67,8 +64,12 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		process_input(&stacks, ac, av);
-		
+		if (is_sorted() == 0)
+			return(-1);
+		if (stacks.a.size <= 5)
+			performe_easy_sort();
+		else
+			performe_sorting_hack();
 	}
-
 	return (0);
 }

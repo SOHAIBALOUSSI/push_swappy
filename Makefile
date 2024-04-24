@@ -2,7 +2,7 @@ NAME = push_swap
 CC = cc
 #CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = main.c args_parsing.c push.c swap.c
+SRC = main.c args_parsing.c push.c swap.c rotate.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = ./libft/libft.a
@@ -17,10 +17,10 @@ libft :
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 clean :
-	@rm -rf $(OBJ) 
+	@rm -f $(OBJ) 
 
 fclean : clean
-	@rm -rf $(NAME)
+	@rm -f  $(NAME)
 
 
 .PHONY : all clean fclean 

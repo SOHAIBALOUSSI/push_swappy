@@ -86,20 +86,19 @@ int	count_nums(char *s, char c)
 	return (counter);
 }
 
-void get_nums(char *arg, t_push_swap *stack)
+void	get_nums(char *arg, t_push_swap *stack)
 {
-	char	*tmp;
 	int		i;
 	int		j;
+	int		curr_size;
+	char	*tmp;
 
 	stack->a.stack = malloc(stack->a.size * sizeof(int));
-	stack->b.stack = malloc(stack->a.size * sizeof(int));
-	if (!stack->a.stack || !stack->b.stack)
+	if (!stack->a.stack)
 		exit_error("Malloc failed!\n", NULL, NULL, NULL);
 	i = -1;
-	stack->a.top = stack->a.size - 1;
-	int real_size = stack->a.size;
-	while (arg[++i] && stack->a.size >= 0)
+	curr_size = stack->a.size;
+	while (arg[++i] && curr_size >= 0)
 	{
 		tmp = NULL;
 		while (arg[i] && arg[i] == ' ')
@@ -110,8 +109,8 @@ void get_nums(char *arg, t_push_swap *stack)
 		while (arg[i] && arg[i] != ' ')
 			i++;
 		tmp = ft_substr(arg, j, i - j);
-		stack->a.stack[--stack->a.size] = fatoi(tmp, stack->a.stack, arg);
-		if (deja_vu(stack->a.stack, stack->a.size, real_size) == -1)
+		stack->a.stack[--curr_size] = fatoi(tmp, stack->a.stack, arg);
+		if (deja_vu(stack->a.stack, curr_size, stack->a.size) == -1)
 			exit_error(NULL, NULL, arg, stack->a.stack);
 	}
 }
