@@ -5,14 +5,10 @@ int	is_sorted(t_stack *a)
 {
 	int i;
 
-	i = a->top;
-	while (a->top > 0)
-	{
-		ft_printf("stk a :%d\n", a->stack[a->top]);
-		if (a->stack[a->top] > a->stack[a->top - 1])
+	i = 0;
+	while (i++ <= a->top)
+		if (a->stack[i] < a->stack[i + 1])
 			return (-1);
-		a->top--;
-	}
 	return (0);
 }
 
@@ -76,7 +72,7 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		process_input(&stacks, ac, av);
-		if (!is_sorted(&stacks.a))
+		if (is_sorted(&stacks.a) != -1)
 		{
 			ft_printf("Done\n");
 			return (EXIT_SUCCESS);
