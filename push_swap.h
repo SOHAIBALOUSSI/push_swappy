@@ -38,5 +38,9 @@ void 	rr(t_stack *a, t_stack *b);
 void	rev_rotate(t_stack *st, char stack);
 void 	rrr(t_stack *a, t_stack *b);
 
+/*	Sorting	*/
+
+void 	performe_easy_sort(t_push_swap *stks);
+
 
 #endif /* PUSH_SWAP_H */

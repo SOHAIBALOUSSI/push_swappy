@@ -2,7 +2,7 @@ NAME = push_swap
 CC = cc
 #CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = main.c args_parsing.c push.c swap.c rotate.c
+SRC = main.c args_parsing.c push.c swap.c rotate.c performe_easy_sort.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = ./libft/libft.a

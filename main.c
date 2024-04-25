@@ -1,14 +1,18 @@
 
 #include "push_swap.h"
 
+
 int	is_sorted(t_stack *a)
 {
 	int i;
 
 	i = 0;
-	while (i++ <= a->top)
+	while (i < a->top)
+	{
 		if (a->stack[i] < a->stack[i + 1])
 			return (-1);
+		i++;
+	}
 	return (0);
 }
 
@@ -72,17 +76,16 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		process_input(&stacks, ac, av);
-		if (is_sorted(&stacks.a) != -1)
+		if (is_sorted(&stacks.a))
 		{
-			ft_printf("Done\n");
-			return (EXIT_SUCCESS);
+			if (stacks.a.size <= 5)
+			{
+				performe_easy_sort(&stacks);	
+				
+			}
+			// else
+			// 	performe_sorting_hack();
 		}
-		else
-			ft_printf("not sorted\n");
-		// if (stacks.a.size <= 5)
-		// 	performe_easy_sort();
-		// else
-		// 	performe_sorting_hack();
 	}
 	return (0);
 }
