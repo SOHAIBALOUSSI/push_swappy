@@ -1,58 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sait-alo <sait-alo@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 07:57:57 by sait-alo          #+#    #+#             */
-/*   Updated: 2024/04/30 07:57:59 by sait-alo         ###   ########.fr       */
+/*   Created: 2024/04/30 07:57:47 by sait-alo          #+#    #+#             */
+/*   Updated: 2024/04/30 07:57:50 by sait-alo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack *a, char print)
+void	rra(t_stack *a, char print)
 {
 	int	tmp;
+	int	i;
 	int	top;
 
 	if (a->size < 2)
 		return ;
-	tmp = a->stack[a->top];
+	i = 0;
+	tmp = a->stack[0];
 	top = a->top;
-	while (top >= 0)
+	while (i < top)
 	{
-		a->stack[top] = a->stack[top - 1];
-		top--;
+		a->stack[i] = a->stack[i + 1];
+		i++;
 	}
-	a->stack[0] = tmp;
+	a->stack[top] = tmp;
 	if (print)
-		write(1, "ra\n", 3);
+		write(1, "rra\n", 4);
 }
 
-void	rb(t_stack *b, char print)
+void	rrb(t_stack *b, char print)
 {
+	int	i;
 	int	tmp;
 	int	top;
 
 	if (b->size < 2)
 		return ;
-	tmp = b->stack[b->top];
+	i = 0;
+	tmp = b->stack[0];
 	top = b->top;
-	while (top >= 0)
+	while (i < top)
 	{
-		b->stack[top] = b->stack[top - 1];
-		top--;
+		b->stack[i] = b->stack[i + 1];
+		i++;
 	}
-	b->stack[0] = tmp;
+	b->stack[top] = tmp;
 	if (print)
-		write(1, "rb\n", 3);
+		write(1, "rrb\n", 4);
 }
 
-void	rr(t_stack *a, t_stack *b)
+void	rrr(t_stack *a, t_stack *b)
 {
-	ra(a, 0);
-	rb(b, 0);
-	write (1, "rr\n", 3);
+	rra(a, 0);
+	rrb(b, 0);
+	write(1, "rrr\n", 4);
 }

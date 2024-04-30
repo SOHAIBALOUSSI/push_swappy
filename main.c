@@ -1,22 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sait-alo <sait-alo@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/30 07:56:35 by sait-alo          #+#    #+#             */
+/*   Updated: 2024/04/30 07:56:43 by sait-alo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-int	is_sorted(t_stack *a)
+int	labelling(t_stack *stk)
 {
-	int i;
+	int	i;
+	int	j;
+	int	rank;
 
 	i = 0;
-	while (i < a->top)
+	stk->clone = malloc(stk->size * sizeof(int));
+	if (!stk->clone)
+		return (-1);
+	while (i < stk->size)
 	{
-		if (a->stack[i] < a->stack[i + 1])
-			return (-1);
+		j = 0;
+		rank = -1;
+		while (j < stk->size)
+			if (stk->stack[j++] <= stk->stack[i])
+				rank++;
+		stk->clone[i] = rank;
 		i++;
 	}
+	i = -1;
+	while (++i < stk->size)
+		stk->stack[i] = stk->clone[i];
+	free(stk->clone);
 	return (0);
 }
 
-char *join_args(int ac, char **av)
+char	*join_args(int ac, char **av)
 {
 	int		i;
 	char	*args;
@@ -27,6 +50,8 @@ char *join_args(int ac, char **av)
 	tmp = NULL;
 	while (i < ac)
 	{
+		if (is_void(av[i]))
+			exit_error("Error\n", NULL, args, NULL);
 		tmp = args;
 		args = ft_strjoin(tmp, av[i]);
 		if (!args)
@@ -42,50 +67,44 @@ char *join_args(int ac, char **av)
 	return (args);
 }
 
-void process_input(t_push_swap *stacks, int ac, char **av)
+int	process_input(t_push_swap *stacks, int ac, char **av)
 {
-	char *args;
+	char	*args;
 
 	args = join_args(ac, av);
 	if (!args)
-		exit_error("Error\nFailed to join Arguments!", NULL, NULL, NULL);
+		return (-1);
 	check_input(args);
 	stacks->a.size = count_nums(args, ' ');
 	get_nums(args, stacks);
-	stacks->a.top = stacks->a.size - 1;
 	stacks->b.stack = malloc(stacks->a.size * sizeof(int));
-
-	// while (stacks->a.top >= 0)
-	// 	ft_printf("stk a : %d\n", stacks->a.stack[stacks->a.top--]);
-	
-
+	if (!stacks->b.stack)
+		return (-1);
+	stacks->a.top = stacks->a.size - 1;
+	stacks->b.top = -1;
+	free(args);
+	return (0);
 }
-
 
 int	main(int ac, char **av)
 {
 	t_push_swap	stacks;
 
-
-	stacks.a = (t_stack){0};
-	stacks.b = (t_stack){0};
-	stacks.b.top = -1;
-
-	if (ac == 1)
-		return (-1);
-	if (ac > 1)
+	stacks = (t_push_swap){0};
+	if (ac >= 2)
 	{
-		process_input(&stacks, ac, av);
-		if (is_sorted(&stacks.a))
-		{
-			if (stacks.a.size <= 5)
-			{
-				performe_easy_sort(&stacks);	
-				
-			}
-			// else
-			// 	performe_sorting_hack();
-		}
+		if (process_input(&stacks, ac, av))
+			return (free(stacks.a.stack), free(stacks.b.stack), -1);
+		if (!is_sorted(&stacks.a))
+			return (free(stacks.a.stack), free(stacks.b.stack), 0);
+		if (stacks.a.size <= 5 && performe_easy_sort(&stacks))
+			return (free(stacks.a.stack), free(stacks.b.stack), 0);
+		if (labelling(&stacks.a))
+			return (free(stacks.a.stack), free(stacks.b.stack), -1);
+		conquer(&stacks);
+		push_back(&stacks);
 	}
+	free(stacks.a.stack);
+	free(stacks.b.stack);
 	return (0);
 }
