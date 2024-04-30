@@ -12,6 +12,7 @@
         "utility": "c",
         "chrono": "c",
         "semaphore": "c",
-        "string": "c"
+        "string": "c",
+        "checker.h": "c"
     }
 }

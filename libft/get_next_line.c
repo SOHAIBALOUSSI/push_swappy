@@ -62,9 +62,9 @@ static char	*get_rest(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*content;
 	char		*buffer;
 	char		*line;
+	static char	*content;
 
 	line = NULL;
 	buffer = malloc((2) * sizeof(char));
@@ -83,15 +83,3 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main()
-// {
-// 	int fd;
-// 	fd = open("get_next_line_utils.c", O_RDWR);
-
-// 	char *line;
-// 	line = get_next_line(fd);
-// 	printf("%s\n", line);
-// }
