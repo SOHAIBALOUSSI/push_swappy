@@ -17,21 +17,9 @@
 # include <limits.h>
 # include <stdio.h>
 
-# define SA 1
-# define SB 2
-# define PA 3
-# define PB 4
-# define RA 5
-# define RB 6
-# define RR 7
-# define RRA 8
-# define RRB 9
-# define RRR 10
-
 typedef struct s_stack
 {
 	int	*stack;
-	int	*clone;
 	int	top;
 	int	size;
 }				t_stack;
@@ -68,9 +56,6 @@ void	rrr(t_stack *a, t_stack *b, int print);
 
 /*	Sorting	*/
 
-int		performe_easy_sort(t_push_swap *stks);
-void	conquer(t_push_swap *stks);
-void	push_back(t_push_swap *stks);
 int		is_sorted(t_stack *a);
 
 #endif /* CHECKER_H */

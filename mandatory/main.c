@@ -82,8 +82,7 @@ int	process_input(t_push_swap *stacks, int ac, char **av)
 		return (-1);
 	stacks->a.top = stacks->a.size - 1;
 	stacks->b.top = -1;
-	free(args);
-	return (0);
+	return (free(args), 0);
 }
 
 int	main(int ac, char **av)
@@ -104,7 +103,5 @@ int	main(int ac, char **av)
 		conquer(&stacks);
 		push_back(&stacks);
 	}
-	free(stacks.a.stack);
-	free(stacks.b.stack);
-	return (0);
+	return (free(stacks.a.stack), free(stacks.b.stack), 0);
 }

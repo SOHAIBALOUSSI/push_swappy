@@ -15,13 +15,8 @@
 int	deja_vu(int *nums, int curr_size, int size)
 {
 	while (--size > curr_size)
-	{
 		if (nums[curr_size] == nums[size])
-		{
-			write(2, "Error\n", 7);
-			return (-1);
-		}
-	}
+			return (write(2, "Error\n", 7), -1);
 	return (0);
 }
 
