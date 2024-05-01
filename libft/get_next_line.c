@@ -80,6 +80,7 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (NULL);
 	content = get_rest(line);
+	free(content);
 	return (line);
 }
 
