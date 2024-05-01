@@ -40,7 +40,7 @@ char	*join_args(int ac, char **av)
 	return (args);
 }
 
-int	process_input(t_push_swap *stacks, int ac, char **av)
+int	process_input(t_push_swap *stks, int ac, char **av)
 {
 	char	*args;
 
@@ -48,13 +48,16 @@ int	process_input(t_push_swap *stacks, int ac, char **av)
 	if (!args)
 		return (-1);
 	check_input(args);
-	stacks->a.size = count_nums(args, ' ');
-	get_nums(args, stacks);
-	stacks->b.stack = malloc(stacks->a.size * sizeof(int));
-	if (!stacks->b.stack)
+	stks->a.size = count_nums(args, ' ');
+	stks->a.stack = malloc(stks->a.size * sizeof(int));
+	if (!stks->a.stack)
 		return (-1);
-	stacks->a.top = stacks->a.size - 1;
-	stacks->b.top = -1;
+	get_nums(args, stks);
+	stks->b.stack = malloc(stks->a.size * sizeof(int));
+	if (!stks->b.stack)
+		return (-1);
+	stks->a.top = stks->a.size - 1;
+	stks->b.top = -1;
 	free(args);
 	return (0);
 }
@@ -90,26 +93,26 @@ int	do_op(t_push_swap *stks, char *inst)
 
 int	main(int ac, char **av)
 {
-	t_push_swap	stacks;
+	char		*check;
+	t_push_swap	stks;
 
-	char *check;
-	stacks = (t_push_swap){0};
+	stks = (t_push_swap){0};
 	if (ac >= 2)
 	{
-		if (process_input(&stacks, ac, av))
-			exit_free(NULL, stacks.a.stack, stacks.b.stack);
+		if (process_input(&stks, ac, av))
+			exit_free(NULL, stks.a.stack, stks.b.stack);
 		while (1)
 		{
-			check = get_next_line(0);
+			check = get_next_line(STDIN_FILENO);
 			if (!check)
 				break ;
-			if (do_op(&stacks, check) == -1)
-				return (free(stacks.a.stack), free(stacks.b.stack), free(check), write(2, "Error\n", 6));
+			if (do_op(&stks, check) == -1)
+				return (free(stks.a.stack), free(stks.b.stack), free(check), write(2, "Error\n", 6));
 		}
-		if (!is_sorted(&stacks.a) && !stacks.b.size)
+		if (!is_sorted(&stks.a) && !stks.b.size)
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
 	}
-	return (free(stacks.a.stack), free(stacks.b.stack), free(check), EXIT_SUCCESS);
+	return (free(stks.a.stack), free(stks.b.stack), free(check), EXIT_SUCCESS);
 }

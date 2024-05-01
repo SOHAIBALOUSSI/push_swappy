@@ -70,9 +70,6 @@ void	get_nums(char *arg, t_push_swap *stack)
 	int		curr_size;
 	char	*tmp;
 
-	stack->a.stack = malloc(stack->a.size * sizeof(int));
-	if (!stack->a.stack)
-		exit(-1);
 	i = -1;
 	curr_size = stack->a.size;
 	while (arg[++i] && curr_size >= 0)
@@ -80,9 +77,9 @@ void	get_nums(char *arg, t_push_swap *stack)
 		tmp = NULL;
 		while (arg[i] && arg[i] == ' ')
 			i++;
-		if (!arg[i])
-			exit_error(NULL, NULL, arg, NULL);
 		j = i;
+		if (!arg[i])
+			return ;
 		while (arg[i] && arg[i] != ' ')
 			i++;
 		tmp = ft_substr(arg, j, i - j);

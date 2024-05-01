@@ -81,7 +81,7 @@ void	get_nums(char *arg, t_push_swap *stack)
 		while (arg[i] && arg[i] == ' ')
 			i++;
 		if (!arg[i])
-			exit_error(NULL, NULL, arg, NULL);
+			return ;
 		j = i;
 		while (arg[i] && arg[i] != ' ')
 			i++;

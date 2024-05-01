@@ -12,75 +12,39 @@
 
 #include "libft.h"
 
-static char	*read_line(int fd, char *content, char *buffer)
+// #include "get_next_line.h"
+
+static void	hold(char **buffer, char **tmp, char **tmp2)
 {
-	ssize_t	readed;
-	char	*tmp;
-
-	readed = 1;
-	while (readed > 0 && !(gnl_strchr(content, '\n')))
-	{
-		readed = read(fd, buffer, 1);
-		if (readed < 0)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		else if (readed == 0)
-			break ;
-		if (!content)
-			content = ft_strdup("");
-		buffer[readed] = '\0';
-		tmp = content;
-		content = ft_strjoin(tmp, buffer);
-		free(tmp);
-		tmp = NULL;
-	}
-	free(buffer);
-	return (content);
-}
-
-static char	*get_rest(char *line)
-{
-	ssize_t	i;
-	char	*result;
-
-	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0')
-		return (NULL);
-	result = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (*result == 0)
-	{
-		free(result);
-		result = NULL;
-	}
-	line[i + 1] = '\0';
-	return (result);
+	*tmp2 = ft_strjoin(*tmp, *buffer);
+	free(*tmp);
+	*tmp = ft_strjoin(*tmp2, "");
+	free(*tmp2);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
-	char		*line;
-	static char	*content;
+	char	*buffer;
+	int		i;
+	char	*tmp;
+	char	*tmp2;
 
-	line = NULL;
-	buffer = malloc((2) * sizeof(char));
 	if (fd < 0)
-	{
-		free(buffer);
-		buffer = NULL;
-		return (NULL);
-	}
+		return (0);
+	buffer = (char *)malloc(2 * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	line = read_line(fd, content, buffer);
-	if (!line)
-		return (NULL);
-	content = get_rest(line);
-	free(content);
-	return (line);
+	i = read(fd, buffer, 1);
+	if (i <= 0 || buffer[0] == '\0')
+		return (free(buffer), NULL);
+	buffer[1] = '\0';
+	tmp = ft_strdup("");
+	while (i > 0 && *buffer != '\n')
+	{
+		hold(&buffer, &tmp, &tmp2);
+		i = read(fd, buffer, 1);
+	}
+	if (*buffer == '\n')
+		return (tmp2 = ft_strjoin(tmp, buffer), free(buffer), free(tmp), tmp2);
+	return (free(buffer), tmp);
 }
-
