@@ -24,10 +24,9 @@ bonus : $(CHECKER)
 
 $(CHECKER) : $(BOBJ)
 	$(CC) $(CFLAGS) $(BOBJ) -o $(CHECKER) $(LIBFT)
-libft :
-	@make -C libft/
 
 $(NAME) : $(OBJ)
+	@make -C libft/
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
 clean :

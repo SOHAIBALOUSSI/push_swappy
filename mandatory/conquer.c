@@ -38,7 +38,9 @@ void	conquer(t_push_swap *stks)
 	int	value;
 	int	range;
 
-	value = 4 * (stks->a.size <= 250) + 10 * (stks->a.size > 250);
+	value = 4;
+	if (stks->a.size > 250)
+		value = 10;
 	while (stks->a.size > 0)
 	{
 		range = stks->a.size / value;
@@ -65,7 +67,7 @@ void	push_back(t_push_swap *stks)
 		max = get_max(&stks->b);
 		if (max <= size / 2)
 		{
-			while (max-- >= 0)
+			while (max-- > 0)
 				rrb(&stks->b, 1);
 			pa(&stks->a, &stks->b);
 		}

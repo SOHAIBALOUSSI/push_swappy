@@ -101,13 +101,13 @@ int	main(int ac, char **av)
 	{
 		if (process_input(&stks, ac, av))
 			exit_free(NULL, stks.a.stack, stks.b.stack);
-		while (1)
+		check = get_next_line(STDIN_FILENO);
+		while (check)
 		{
-			check = get_next_line(STDIN_FILENO);
-			if (!check)
-				break ;
 			if (do_op(&stks, check) == -1)
 				return (free(stks.a.stack), free(stks.b.stack), free(check), write(2, "Error\n", 6));
+			free(check);
+			check = get_next_line(STDIN_FILENO);
 		}
 		if (!is_sorted(&stks.a) && !stks.b.size)
 			write(1, "OK\n", 3);

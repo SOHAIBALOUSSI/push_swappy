@@ -13,6 +13,7 @@
         "chrono": "c",
         "semaphore": "c",
         "string": "c",
-        "checker.h": "c"
+        "checker.h": "c",
+        "libft.h": "c"
     }
 }
