@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	rra(t_stack *a, char print)
+void	rra(t_stack *a)
 {
 	int	tmp;
 	int	i;
@@ -29,11 +29,10 @@ void	rra(t_stack *a, char print)
 		i++;
 	}
 	a->stack[top] = tmp;
-	if (print)
-		write(1, "rra\n", 4);
+	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack *b, char print)
+void	rrb(t_stack *b)
 {
 	int	i;
 	int	tmp;
@@ -50,13 +49,12 @@ void	rrb(t_stack *b, char print)
 		i++;
 	}
 	b->stack[top] = tmp;
-	if (print)
-		write(1, "rrb\n", 4);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stack *a, t_stack *b)
 {
-	rra(a, 0);
-	rrb(b, 0);
+	rra(a);
+	rrb(b);
 	write(1, "rrr\n", 4);
 }

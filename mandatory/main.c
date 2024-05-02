@@ -94,9 +94,8 @@ int	main(int ac, char **av)
 	{
 		if (process_input(&stacks, ac, av))
 			return (free(stacks.a.stack), free(stacks.b.stack), -1);
-		if (!is_sorted(&stacks.a))
-			return (free(stacks.a.stack), free(stacks.b.stack), 0);
-		if (stacks.a.size <= 5 && performe_easy_sort(&stacks))
+		if (!is_sorted(&stacks.a)
+			|| (stacks.a.size <= 5 && performe_easy_sort(&stacks)))
 			return (free(stacks.a.stack), free(stacks.b.stack), 0);
 		if (labelling(&stacks.a))
 			return (free(stacks.a.stack), free(stacks.b.stack), -1);

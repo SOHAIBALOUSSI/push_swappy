@@ -41,7 +41,7 @@ void	conquer(t_push_swap *stks)
 	while (stks->a.size > 0)
 	{
 		value = 4;
-		if (stks->a.size > 140)
+		if (stks->a.size >= 140)
 			value = 10;
 		range = stks->a.size / value;
 		if (stks->a.stack[stks->a.top] < stks->b.size)
@@ -49,10 +49,10 @@ void	conquer(t_push_swap *stks)
 		else if (stks->a.stack[stks->a.top] <= stks->b.size + range)
 		{
 			pb(&stks->a, &stks->b);
-			rb(&stks->b, 1);
+			rb(&stks->b);
 		}
 		else
-			ra(&stks->a, 1);
+			ra(&stks->a);
 	}
 }
 
@@ -68,13 +68,13 @@ void	push_back(t_push_swap *stks)
 		if (max <= size / 2)
 		{
 			while (max-- >= 0)
-				rrb(&stks->b, 1);
+				rrb(&stks->b);
 			pa(&stks->a, &stks->b);
 		}
 		else if ((max > size / 2))
 		{
 			while (max++ < size - 1)
-				rb(&stks->b, 1);
+				rb(&stks->b);
 			pa(&stks->a, &stks->b);
 		}
 	}

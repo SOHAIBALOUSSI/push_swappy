@@ -42,17 +42,17 @@ void	exit_error(char *error_msg, char *str, char *args, int *array);
 
 /* OPERATIONS */
 
-void	sa(t_stack *a, char print);
-void	sb(t_stack *b, char print);
-void	ss(t_stack *a, t_stack *b, int print);
-void	pa(t_stack *a, t_stack *b, int print);
-void	pb(t_stack *a, t_stack *b, int print);
-void	ra(t_stack *a, char print);
-void	rb(t_stack *b, char print);
-void	rr(t_stack *a, t_stack *b, int print);
-void	rra(t_stack *a, char print);
-void	rrb(t_stack *b, char print);
-void	rrr(t_stack *a, t_stack *b, int print);
+void	sa(t_stack *a);
+void	sb(t_stack *b);
+void	ss(t_stack *a, t_stack *b);
+void	pa(t_stack *a, t_stack *b);
+void	pb(t_stack *a, t_stack *b);
+void	ra(t_stack *a);
+void	rb(t_stack *b);
+void	rr(t_stack *a, t_stack *b);
+void	rra(t_stack *a);
+void	rrb(t_stack *b);
+void	rrr(t_stack *a, t_stack *b);
 
 /*	Sorting	*/
 

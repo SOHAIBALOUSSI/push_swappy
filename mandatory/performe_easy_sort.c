@@ -35,21 +35,21 @@ static void	sort_three(t_stack *stks)
 	middle = stks->stack[1];
 	bottom = stks->stack[0];
 	if (top > middle && middle < bottom && top < bottom)
-		sa(stks, 1);
+		sa(stks);
 	else if (top > middle && middle > bottom)
 	{
-		sa(stks, 1);
-		rra(stks, 1);
+		sa(stks);
+		rra(stks);
 	}
 	else if (top > middle && middle < bottom && top > bottom)
-		ra(stks, 1);
+		ra(stks);
 	else if (top < middle && middle > bottom && bottom > top)
 	{
-		sa(stks, 1);
-		ra(stks, 1);
+		sa(stks);
+		ra(stks);
 	}
 	else
-		rra(stks, 1);
+		rra(stks);
 }
 
 static void	sort_four(t_push_swap *stks)
@@ -58,7 +58,7 @@ static void	sort_four(t_push_swap *stks)
 
 	min = get_min(&stks->a);
 	while (stks->a.stack[stks->a.top] != min)
-		ra(&stks->a, 1);
+		ra(&stks->a);
 	if (!is_sorted(&stks->a))
 		return ;
 	pb(&stks->a, &stks->b);
@@ -72,16 +72,16 @@ static void	sort_five(t_push_swap *stks)
 
 	min = get_min(&stks->a);
 	if (stks->a.stack[0] == min)
-		rra(&stks->a, 1);
+		rra(&stks->a);
 	else if (stks->a.stack[1] == min)
 	{
-		rra(&stks->a, 1);
-		rra(&stks->a, 1);
+		rra(&stks->a);
+		rra(&stks->a);
 	}
 	else
 	{
 		while (stks->a.stack[stks->a.top] != min)
-			ra(&stks->a, 1);
+			ra(&stks->a);
 	}
 	if (!is_sorted(&stks->a))
 		return ;
@@ -95,7 +95,7 @@ int	performe_easy_sort(t_push_swap *stks)
 	if (stks->a.size == 2)
 	{
 		if (stks->a.stack[0] < stks->a.stack[1])
-			sa(&stks->a, 1);
+			sa(&stks->a);
 	}
 	else if (stks->a.size == 3)
 		sort_three(&stks->a);

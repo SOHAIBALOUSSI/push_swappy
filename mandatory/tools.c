@@ -22,7 +22,7 @@ void	exit_error(char *error_msg, char *str, char *args, int *array)
 		free(args);
 	if (array)
 		free(array);
-	exit(-1);
+	exit(EXIT_FAILURE);
 }
 
 void	exit_free(int *a, int *b)

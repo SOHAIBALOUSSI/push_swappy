@@ -12,6 +12,22 @@
 
 #include "libft.h"
 
+static int	gnl_strchr(const char *s, char c)
+{
+	int		i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static char	*read_line(int fd, char *content, char *buffer)
 {
 	ssize_t	readed;

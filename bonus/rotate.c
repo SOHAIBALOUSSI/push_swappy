@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-void	ra(t_stack *a, char print)
+void	ra(t_stack *a)
 {
 	int	tmp;
 	int	top;
@@ -27,11 +27,9 @@ void	ra(t_stack *a, char print)
 		top--;
 	}
 	a->stack[0] = tmp;
-	if (print)
-		write(1, "ra\n", 3);
 }
 
-void	rb(t_stack *b, char print)
+void	rb(t_stack *b)
 {
 	int	tmp;
 	int	top;
@@ -46,14 +44,10 @@ void	rb(t_stack *b, char print)
 		top--;
 	}
 	b->stack[0] = tmp;
-	if (print)
-		write(1, "rb\n", 3);
 }
 
-void	rr(t_stack *a, t_stack *b, int print)
+void	rr(t_stack *a, t_stack *b)
 {
-	ra(a, 0);
-	rb(b, 0);
-	if (print)
-		write (1, "rr\n", 3);
+	ra(a);
+	rb(b);
 }

@@ -12,8 +12,7 @@
 
 #include "checker.h"
 
-
-void	pa(t_stack *a, t_stack *b, int print)
+void	pa(t_stack *a, t_stack *b)
 {
 	if (b->size <= 0)
 		return ;
@@ -22,11 +21,9 @@ void	pa(t_stack *a, t_stack *b, int print)
 	a->stack[a->top] = b->stack[b->top];
 	b->top--;
 	b->size--;
-	if (print)
-		write(1, "pa\n", 3);
 }
 
-void	pb(t_stack *a, t_stack *b, int print)
+void	pb(t_stack *a, t_stack *b)
 {
 	if (a->size <= 0)
 		return ;
@@ -35,11 +32,9 @@ void	pb(t_stack *a, t_stack *b, int print)
 	b->stack[b->top] = a->stack[a->top];
 	a->top--;
 	a->size--;
-	if (print)
-		write(1, "pb\n", 3);
 }
 
-void	sa(t_stack *a, char print)
+void	sa(t_stack *a)
 {
 	int	tmp;
 
@@ -48,11 +43,9 @@ void	sa(t_stack *a, char print)
 	tmp = a->stack[a->top];
 	a->stack[a->top] = a->stack[a->top - 1];
 	a->stack[a->top - 1] = tmp;
-	if (print)
-		write(1, "sa\n", 3);
 }
 
-void	sb(t_stack *b, char print)
+void	sb(t_stack *b)
 {
 	int	tmp;
 
@@ -61,14 +54,10 @@ void	sb(t_stack *b, char print)
 	tmp = b->stack[b->top];
 	b->stack[b->top] = b->stack[b->top - 1];
 	b->stack[b->top - 1] = tmp;
-	if (print)
-		write(1, "sb\n", 3);
 }
 
-void	ss(t_stack *a, t_stack *b, int print)
+void	ss(t_stack *a, t_stack *b)
 {
-	sa(a, 0);
-	sb(b, 0);
-	if (print)
-		write(1, "ss\n", 3);
+	sa(a);
+	sb(b);
 }

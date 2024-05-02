@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-char	*join_args(int ac, char **av)
+static char	*join_args(int ac, char **av)
 {
 	int		i;
 	char	*args;
@@ -40,7 +40,7 @@ char	*join_args(int ac, char **av)
 	return (args);
 }
 
-int	process_input(t_push_swap *stks, int ac, char **av)
+static int	process_input(t_push_swap *stks, int ac, char **av)
 {
 	char	*args;
 
@@ -62,30 +62,30 @@ int	process_input(t_push_swap *stks, int ac, char **av)
 	return (0);
 }
 
-int	do_op(t_push_swap *stks, char *inst)
+static int	do_op(t_push_swap *stks, char *inst)
 {
-	if (!ft_strncmp("sa\n", inst, 3) )
-		sa(&stks->a, 0);
+	if (!ft_strncmp("sa\n", inst, 3))
+		sa(&stks->a);
 	else if (!ft_strncmp("sb\n", inst, 3))
-		sb(&stks->a, 0);
+		sb(&stks->a);
 	else if (!ft_strncmp("ss\n", inst, 3))
-		ss(&stks->a, &stks->b, 0);
+		ss(&stks->a, &stks->b);
 	else if (!ft_strncmp("pa\n", inst, 3))
-		pa(&stks->a, &stks->b, 0);
+		pa(&stks->a, &stks->b);
 	else if (!ft_strncmp("pb\n", inst, 3))
-		pb(&stks->a, &stks->b, 0);
+		pb(&stks->a, &stks->b);
 	else if (!ft_strncmp("ra\n", inst, 3))
-		ra(&stks->a, 0);
+		ra(&stks->a);
 	else if (!ft_strncmp("rb\n", inst, 3))
-		rb(&stks->b, 0);
+		rb(&stks->b);
 	else if (!ft_strncmp("rr\n", inst, 3))
-		rr(&stks->a, &stks->b, 0);
+		rr(&stks->a, &stks->b);
 	else if (!ft_strncmp("rra\n", inst, 4))
-		rra(&stks->a, 0);
+		rra(&stks->a);
 	else if (!ft_strncmp("rrb\n", inst, 4))
-		rrb(&stks->b, 0);
+		rrb(&stks->b);
 	else if (!ft_strncmp("rrr\n", inst, 4))
-		rrr(&stks->a, &stks->b, 0);
+		rrr(&stks->a, &stks->b);
 	else
 		return (-1);
 	return (0);
@@ -94,25 +94,26 @@ int	do_op(t_push_swap *stks, char *inst)
 int	main(int ac, char **av)
 {
 	char		*check;
-	t_push_swap	stks;
+	t_push_swap	stk;
 
-	stks = (t_push_swap){0};
+	stk = (t_push_swap){0};
 	if (ac >= 2)
 	{
-		if (process_input(&stks, ac, av))
-			exit_free(NULL, stks.a.stack, stks.b.stack);
+		if (process_input(&stk, ac, av))
+			exit_free(NULL, stk.a.stack, stk.b.stack);
 		check = get_next_line(STDIN_FILENO);
 		while (check)
 		{
-			if (do_op(&stks, check) == -1)
-				return (free(stks.a.stack), free(stks.b.stack), free(check), write(2, "Error\n", 6));
+			if (do_op(&stk, check) == -1)
+				return (free(stk.a.stack), free(stk.b.stack),
+					free(check), write(2, "Error\n", 6));
 			free(check);
 			check = get_next_line(STDIN_FILENO);
 		}
-		if (!is_sorted(&stks.a) && !stks.b.size)
+		if (!is_sorted(&stk.a) && !stk.b.size)
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
 	}
-	return (free(stks.a.stack), free(stks.b.stack), free(check), EXIT_SUCCESS);
+	return (free(stk.a.stack), free(stk.b.stack), free(check), EXIT_SUCCESS);
 }

@@ -10,7 +10,7 @@ SRC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_toupper.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c get_next_line.c \
 		ft_printf.c ft_puthex.c ft_putchar.c ft_putnbr.c ft_putstr.c ft_putadress.c \
-		ft_base16.c get_next_line_utils.c
+		ft_base16.c
 
 
 BSRC =	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
