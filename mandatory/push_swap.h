@@ -33,11 +33,9 @@ typedef struct s_push_swap
 
 /* Parsing araguments */
 
-// void	check_input(char *s);
 int		is_void(char *av);
 void	get_nums(char *arg, t_push_swap *stack);
 int		count_nums(char *s, char c);
-// int		fatoi(char *str, int *nums, char *arg);
 void	exit_free(int *a, int *b);
 void	exit_error(char *error_msg, char *str, char *args, int *array);
 
