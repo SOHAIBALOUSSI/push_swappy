@@ -12,7 +12,19 @@
 
 #include "push_swap.h"
 
-int	labelling(t_stack *stk)
+static void	check_input(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		if ((!ft_isdigit(s[i]) && (s[i] != '-' && s[i] != '+' && s[i] != ' '))
+			|| ((s[i] == '-' || s[i] == '+') && !ft_isdigit(s[i + 1]))
+			|| ((s[i] == '-' || s[i] == '+') && ft_isdigit(s[i - 1])))
+			exit_error("Error\n", s, NULL, NULL);
+}
+
+static int	labelling(t_stack *stk)
 {
 	int	i;
 	int	j;
@@ -39,7 +51,7 @@ int	labelling(t_stack *stk)
 	return (0);
 }
 
-char	*join_args(int ac, char **av)
+static char	*join_args(int ac, char **av)
 {
 	int		i;
 	char	*args;
@@ -67,7 +79,7 @@ char	*join_args(int ac, char **av)
 	return (args);
 }
 
-int	process_input(t_push_swap *stacks, int ac, char **av)
+static int	process_input(t_push_swap *stacks, int ac, char **av)
 {
 	char	*args;
 

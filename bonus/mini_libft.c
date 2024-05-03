@@ -1,15 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sait-alo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 20:08:53 by sait-alo          #+#    #+#             */
-/*   Updated: 2023/11/17 20:09:19 by sait-alo         ###   ########.fr       */
+/*   Created: 2023/11/13 17:06:47 by sait-alo          #+#    #+#             */
+/*   Updated: 2023/11/13 17:06:49 by sait-alo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "checker.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*sub;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	sub = malloc((len + 1) * sizeof(char));
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (!n)
+		return (0);
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -35,4 +84,14 @@ char	*ft_strjoin(char *s1, char *s2)
 		new[j++] = s2[i++];
 	new[j] = '\0';
 	return (new);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

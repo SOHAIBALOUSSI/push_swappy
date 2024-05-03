@@ -13,8 +13,9 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include "../libft/libft.h"
+# include <unistd.h>
 # include <limits.h>
+# include <stdlib.h>
 
 typedef struct s_stack
 {
@@ -56,5 +57,15 @@ void	rrr(t_stack *a, t_stack *b);
 /*	Sorting	*/
 
 int		is_sorted(t_stack *a);
+
+/* 	Utils	*/
+
+char	*get_next_line(int fd);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_isdigit(int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
 
 #endif /* CHECKER_H */

@@ -54,3 +54,13 @@ void	rr(t_stack *a, t_stack *b)
 	rb(b);
 	write (1, "rr\n", 3);
 }
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

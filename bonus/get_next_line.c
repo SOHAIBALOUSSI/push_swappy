@@ -10,7 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "checker.h"
+
+char	*ft_strdup(const char *s)
+{
+	size_t	i;
+	char	*new;
+
+	i = 0;
+	new = (char *)malloc(ft_strlen(s) + 1);
+	if (!new)
+		return (NULL);
+	while (s[i])
+	{
+		new[i] = s[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
 
 static int	gnl_strchr(const char *s, char c)
 {

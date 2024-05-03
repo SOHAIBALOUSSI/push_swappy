@@ -13,9 +13,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
 # include <limits.h>
-# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_stack
 {
@@ -33,11 +33,11 @@ typedef struct s_push_swap
 
 /* Parsing araguments */
 
-void	check_input(char *s);
+// void	check_input(char *s);
 int		is_void(char *av);
 void	get_nums(char *arg, t_push_swap *stack);
 int		count_nums(char *s, char c);
-int		fatoi(char *str, int *nums, char *arg);
+// int		fatoi(char *str, int *nums, char *arg);
 void	exit_free(int *a, int *b);
 void	exit_error(char *error_msg, char *str, char *args, int *array);
 
@@ -60,5 +60,14 @@ int		performe_easy_sort(t_push_swap *stks);
 void	conquer(t_push_swap *stks);
 void	push_back(t_push_swap *stks);
 int		is_sorted(t_stack *a);
+
+/* 	Utils	*/
+
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_isdigit(int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
 
 #endif /* PUSH_SWAP_H */

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	deja_vu(int *nums, int curr_size, int size)
+static int	deja_vu(int *nums, int curr_size, int size)
 {
 	while (--size > curr_size)
 		if (nums[curr_size] == nums[size])
@@ -20,19 +20,7 @@ int	deja_vu(int *nums, int curr_size, int size)
 	return (0);
 }
 
-void	check_input(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		if ((!ft_isdigit(s[i]) && (s[i] != '-' && s[i] != '+' && s[i] != ' '))
-			|| ((s[i] == '-' || s[i] == '+') && !ft_isdigit(s[i + 1]))
-			|| ((s[i] == '-' || s[i] == '+') && ft_isdigit(s[i - 1])))
-			exit_error("Error\n", s, NULL, NULL);
-}
-
-int	fatoi(char *str, int *nums, char *arg)
+static int	fatoi(char *str, int *nums, char *arg)
 {
 	int			i;
 	int			s;
