@@ -30,6 +30,7 @@ typedef struct s_list
 }	t_list;
 
 /* Libft functions*/
+
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -80,7 +81,9 @@ int		ft_puthex(unsigned int nb, int type);
 int		ft_putstr(char *str);
 int		ft_putadress(void *arg);
 int		ft_base16(unsigned long nb, char *base);
+
 /* get_next_line function*/
+
 char	*get_next_line(int fd);
 
 /* printf function*/
