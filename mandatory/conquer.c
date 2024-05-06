@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 static	int	get_max(t_stack *stk)
 {
 	int	i;
@@ -35,15 +34,12 @@ static	int	get_max(t_stack *stk)
 
 void	conquer(t_push_swap *stks)
 {
-	int	value;
 	int	range;
 
 	while (stks->a.size > 0)
 	{
-		value = 4;
-		if (stks->a.size >= 140)
-			value = 8;
-		range = stks->a.size / value;
+		/* sqrt is a Forbidenn function (you can create you're own) */
+		range = (4 * sqrt((double)stks->a.size) / 2) - 1; 
 		if (stks->a.stack[stks->a.top] <= stks->b.size)
 			pb(&stks->a, &stks->b);
 		else if (stks->a.stack[stks->a.top] <= stks->b.size + range)

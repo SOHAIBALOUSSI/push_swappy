@@ -16,6 +16,8 @@
 # include <limits.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "math.h"
+
 
 typedef struct s_stack
 {
